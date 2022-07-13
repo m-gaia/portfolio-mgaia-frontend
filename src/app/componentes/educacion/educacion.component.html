@@ -1,43 +1,49 @@
-<div class="row main-container">
-    <h1>Educación</h1>
-    <div class="text-center">
-        <button type="button" class="btn btn-success" (click)="onOpenModal('agregar')">
-            <a class="nav-link" style="color:aliceblue">
-            Añadir Educación <span class="sr-only">(current)</span>
-            </a>
-        </button>
+<div class="row main-container font1">
+    <div class="d-grid gap-2 col-lg-12 mx-auto py-2">
+        <div id="educacion" class="card-header bg-dark py-3 blockquote">
+            <h2 class="text-light text-uppercase card-title"><i class="fas fa-graduation-cap px-2"></i>Educación</h2>
+        </div>
+        <div class="text-center py-2">
+            <button type="button" class="btn btn-success" (click)="onOpenModal('agregar')">
+                <a class="nav-link text-light">
+                Añadir Educación <span class="sr-only">(current)</span>
+                </a>
+            </button>
+        </div>
     </div>
 </div>
 <div id="main-container">
-  <div *ngFor="let educacion of educaciones" class="col-lg-12">
-    <div class="container">
-      <div class="row align-items-start" >
-        <div class="col">
-            <img src="{{educacion.imgEdu}}"  alt="" width="200">
+  <div *ngFor="let educacion of educaciones" class="col-lg-12 py-2">
+    <div class="container card rounded-start py-2 font1">
+        <div class="row align-items-start" >
+            <div class="col">
+                <img src="{{educacion.imgEdu}}"  alt="" width="200">
+            </div>
+            <div class="col">
+                <h4>{{educacion.tituloEdu}}</h4>
+            </div>
+            <div class="col text-center">
+                <a 
+                (click)="onOpenModal('actualizar', educacion)"
+                class="btn btn-primary tooltips mx-2"
+                data-placement="top"
+                data-toggle="tooltip"
+                data-original-title="Actualizar"
+                ><i class="fas fa-edit"></i>
+                </a>
+                <a 
+                (click)="onOpenModal('eliminar', educacion)"
+                class="btn btn-secondary tooltips mx-2"
+                data-placement="top"
+                data-toggle="tooltip"
+                data-original-title="Eliminar"
+                ><i class="fas fa-trash-alt"></i>
+                </a>
+            </div>
+        <div class="row col-12 card-subtitle py-4 text-muted">
+            <h5>{{educacion.fechaInicioEdu}} - {{educacion.fechaFinEdu}}</h5>
+            <h5>{{educacion.descripcionEdu}}</h5>
         </div>
-        <div class="col">
-          <h4>{{educacion.tituloEdu}}</h4>
-        </div>
-        <div class="col text-center">
-            <h3>{{educacion.fechaInicioEdu}}</h3>
-            <a 
-            (click)="onOpenModal('actualizar', educacion)"
-            class="btn btn-primary tooltips"
-            data-placement="top"
-            data-toggle="tooltip"
-            data-original-title="Actualizar"
-            ><i class="fas fa-edit"></i>
-            </a>
-            <a 
-            (click)="onOpenModal('eliminar', educacion)"
-            class="btn btn-secondary tooltips"
-            data-placement="top"
-            data-toggle="tooltip"
-            data-original-title="Eliminar"
-            ><i class="fas fa-trash-alt"></i>
-            </a>
-        </div>
-      </div>
     </div>
   </div>
 </div>
@@ -58,26 +64,15 @@
                 <h5 class="modal-title" id="agregarEducacionModalLabel">Añadir Educación</h5>
                 <button 
                 type="button" 
-                class="close" 
+                class="close rounded" 
                 data-dismiss="modal" 
-                aria-label="close">
+                aria-label="Close">
                 <span aria-hidden="true"> &times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body font1">
                 <form #addForm="ngForm" (ngSubmit)="onAddEducacion(addForm)">
-                    <div class="form-group">
-                        <label for="nombreEdu">Institución</label>
-                        <input 
-                        type="text" 
-                        ngModel 
-                        name="nombreEdu" 
-                        class="form-control" 
-                        id="nombreEdu" 
-                        placeholder="Institución" 
-                        required>
-                    </div>
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <label for="tituloEdu">Titulo</label>
                         <input 
                         type="text" 
@@ -88,7 +83,18 @@
                         placeholder="Titulo" 
                         required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group my-2">
+                        <label for="nombreEdu">Institución</label>
+                        <input 
+                        type="text" 
+                        ngModel 
+                        name="nombreEdu" 
+                        class="form-control" 
+                        id="nombreEdu" 
+                        placeholder="Institución" 
+                        required>
+                    </div>
+                    <div class="form-group my-2">
                         <label for="fechaInicioEdu">Inicio</label>
                         <input 
                         type="text" 
@@ -96,10 +102,10 @@
                         name="fechaInicioEdu" 
                         class="form-control" 
                         id="fechaInicioEdu" 
-                        placeholder="Año Inicio" 
+                        placeholder="Año Inicio (YYYY)" 
                         required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <label for="fechaFinEdu">Fin</label>
                         <input 
                         type="text" 
@@ -107,10 +113,10 @@
                         name="fechaFinEdu" 
                         class="form-control" 
                         id="fechaFinEdu" 
-                        placeholder="Año Fin" 
+                        placeholder="Año Fin (YYYY)" 
                         required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <label for="descripcionEdu">Descripción</label>
                         <input 
                         type="text" 
@@ -121,8 +127,8 @@
                         placeholder="Descripción" 
                         required>
                     </div>
-                    <div class="form-group">
-                        <label for="imgEdu">Url Imágen</label>
+                    <div class="form-group my-2">
+                        <label for="imgEdu">URL Imágen</label>
                         <input 
                         type="text" 
                         ngModel 
@@ -177,9 +183,9 @@
                 <span aria-hidden="true"> &times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body font1">
                 <form #editForm="ngForm">
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <label for="tituloEdu">Titulo</label>
                         <input 
                         type="text" 
@@ -199,7 +205,7 @@
                     id="idEdu" 
                     placeholder="" 
                     >
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <label for="nombreEdu">Institución</label>
                         <input 
                         type="text" 
@@ -210,7 +216,7 @@
                         placeholder="" 
                         >
                     </div>
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <label for="fechaInicioEdu">Año Inicio</label>
                         <input 
                         type="text" 
@@ -221,7 +227,7 @@
                         placeholder="" 
                         >
                     </div>
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <label for="fechaFinEdu">Año Fin</label>
                         <input 
                         type="text" 
@@ -232,7 +238,7 @@
                         placeholder="" 
                         >
                     </div>
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <label for="descripcionEdu">Descripción</label>
                         <input 
                         type="text" 
@@ -243,8 +249,8 @@
                         placeholder="" 
                         >
                     </div>
-                    <div class="form-group">
-                        <label for="imgEdu">Url Imágen</label>
+                    <div class="form-group my-2">
+                        <label for="imgEdu">URL Imágen</label>
                         <input 
                         type="text" 
                         ngModel="{{actualizarEducacion?.imgEdu}}"
@@ -289,7 +295,7 @@
     >
 
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content font1">
             <div class="modal-header">
                 <h5 class="modal-title" id="eliminarEducacionModalLabel">Eliminar Educación</h5>
                 <button 
