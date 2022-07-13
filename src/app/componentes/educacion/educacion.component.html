@@ -15,12 +15,15 @@
 <div id="main-container">
   <div *ngFor="let educacion of educaciones" class="col-lg-12 py-2">
     <div class="container card rounded-start py-2 font1">
-        <div class="row align-items-start" >
+        <div class="row align-items-center" >
             <div class="col">
                 <img src="{{educacion.imgEdu}}"  alt="" width="200">
             </div>
             <div class="col">
                 <h4>{{educacion.tituloEdu}}</h4>
+            </div>
+            <div class="col text-muted">
+                <h5>|  {{educacion.fechaInicioEdu}} - {{educacion.fechaFinEdu}}</h5>
             </div>
             <div class="col text-center">
                 <a 
@@ -41,7 +44,6 @@
                 </a>
             </div>
         <div class="row col-12 card-subtitle py-4 text-muted">
-            <h5>{{educacion.fechaInicioEdu}} - {{educacion.fechaFinEdu}}</h5>
             <h5>{{educacion.descripcionEdu}}</h5>
         </div>
     </div>
