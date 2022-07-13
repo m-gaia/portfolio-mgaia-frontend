@@ -1,1 +1,341 @@
+<div class="row main-container font1">
+    <div class="d-grid gap-2 col-lg-12 mx-auto py-2">
+        <div id="experiencia" class="card-header bg-dark py-3 blockquote">
+            <h2 class="text-light text-uppercase card-title"><i class="fas fa-briefcase px-2"></i>Experiencia</h2>
+        </div>
+        <div class="text-center py-2">
+            <button type="button" class="btn btn-success" (click)="onOpenModal('agregar')">
+                <a class="nav-link text-light">
+                Añadir Experiencia <span class="sr-only">(current)</span>
+                </a>
+            </button>
+        </div>
+    </div>
+</div>
+<div id="main-container">
+  <div *ngFor="let experiencia of experiencias" class="col-lg-12 py-2">
+    <div class="container card rounded-start py-2 font1">
+        <div class="row align-items-start" >
+            <div class="col">
+                <img src="{{experiencia.imgEx}}"  alt="" width="150">
+            </div>
+            <div class="col">
+                <h4>{{experiencia.puestoEx}}</h4>
+            </div>
+            <div class="col text-center">
+                <a 
+                (click)="onOpenModal('actualizar', experiencia)"
+                class="btn btn-primary tooltips mx-2"
+                data-placement="top"
+                data-toggle="tooltip"
+                data-original-title="Actualizar"
+                ><i class="fas fa-edit"></i>
+                </a>
+                <a 
+                (click)="onOpenModal('eliminar', experiencia)"
+                class="btn btn-secondary tooltips mx-2"
+                data-placement="top"
+                data-toggle="tooltip"
+                data-original-title="Eliminar"
+                ><i class="fas fa-trash-alt"></i>
+                </a>
+            </div>
+        <div class="row col-12 card-subtitle py-4 text-muted">
+            <h5>{{experiencia.fechaInicioEx}} - {{experiencia.fechaFinEx}}</h5>
+            <h5>{{experiencia.descripcionEx}}</h5>
+        </div>
+    </div>
+  </div>
+</div>
 
+  <!-- Modal Añadir Experiencia -->
+
+<div 
+    class="modal fade" 
+    id="agregarExperienciaModal" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="agregarExperienciaModalLabel" 
+    aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agregarExperienciaModalLabel">Añadir Experiencia</h5>
+                <button 
+                type="button" 
+                class="close rounded" 
+                data-dismiss="modal" 
+                aria-label="Close">
+                <span aria-hidden="true"> &times;</span>
+                </button>
+            </div>
+            <div class="modal-body font1">
+                <form #addForm="ngForm" (ngSubmit)="onAddExperiencia(addForm)">
+                    <div class="form-group my-2">
+                        <label for="puestoEx">Puesto</label>
+                        <input 
+                        type="text" 
+                        ngModel 
+                        name="puestoEx" 
+                        class="form-control" 
+                        id="puestoEx" 
+                        placeholder="Puesto" 
+                        required>
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="empresaEx">Empresa</label>
+                        <input 
+                        type="text" 
+                        ngModel 
+                        name="empresaEx" 
+                        class="form-control" 
+                        id="empresaEx" 
+                        placeholder="Empresa" 
+                        required>
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="fechaInicioEx">Inicio</label>
+                        <input 
+                        type="text" 
+                        ngModel 
+                        name="fechaInicioEx" 
+                        class="form-control" 
+                        id="fechaInicioEx" 
+                        placeholder="Año Inicio (YYYY)" 
+                        required>
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="fechaFinEx">Fin</label>
+                        <input 
+                        type="text" 
+                        ngModel 
+                        name="fechaFinEx" 
+                        class="form-control" 
+                        id="fechaFinEx" 
+                        placeholder="Año Fin (YYYY)" 
+                        required>
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="descripcionEx">Descripción</label>
+                        <input 
+                        type="text" 
+                        ngModel 
+                        name="descripcionEx" 
+                        class="form-control" 
+                        id="descripcionEx" 
+                        placeholder="Descripción" 
+                        required>
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="imgEx">URL Imágen</label>
+                        <input 
+                        type="text" 
+                        ngModel 
+                        name="imgEx" 
+                        class="form-control" 
+                        id="imgEx" 
+                        placeholder="Logo Empresa" 
+                        required>
+                    </div>
+                    <div class="modal-footer">
+                        <button 
+                        type="button" 
+                        id="add-education-form" 
+                        class="btn btn-secondary" 
+                        data-dismiss="modal">
+                            Cerrar
+                        </button>
+                        <button 
+                        [disabled]="addForm.invalid" 
+                        type="submit" 
+                        class="btn btn-primary"> 
+                            Añadir cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<!-- Modal Editar Experiencia -->
+
+<div 
+    class="modal fade" 
+    id="actualizarExperienciaModal" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="actualizarExperienciaModalLabel" 
+    aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="actualizarExperienciaModalLabel">
+                    Editar Experiencia {{actualizarExperiencia?.empresaEx}}
+                </h5>
+                <button 
+                type="button" 
+                class="close" 
+                data-dismiss="modal" 
+                aria-label="close">
+                <span aria-hidden="true"> &times;</span>
+                </button>
+            </div>
+            <div class="modal-body font1">
+                <form #editForm="ngForm">
+                    <div class="form-group my-2">
+                        <label for="puestoEx">Puesto</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{actualizarExperiencia?.puestoEx}}"
+                        name="puestoEx" 
+                        class="form-control" 
+                        id="puestoEx" 
+                        aria-describedby="emailHelp"
+                        placeholder="Puesto" 
+                        >
+                    </div>
+                    <input 
+                    type="hidden" 
+                    ngModel="{{actualizarExperiencia?.idEx}}"
+                    name="idEx" 
+                    class="form-control" 
+                    id="idEx" 
+                    placeholder="" 
+                    >
+                    <div class="form-group my-2">
+                        <label for="empresaEx">Empresa</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{actualizarExperiencia?.empresaEx}} "
+                        name="empresaEx" 
+                        class="form-control" 
+                        id="empresaEx" 
+                        placeholder="" 
+                        >
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="fechaInicioEx">Año Inicio</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{actualizarExperiencia?.fechaInicioEx}} " 
+                        name="fechaInicioEx" 
+                        class="form-control" 
+                        id="fechaInicioEx" 
+                        placeholder="" 
+                        >
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="fechaFinEx">Año Fin</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{actualizarExperiencia?.fechaFinEx}} "
+                        name="fechaFinEx" 
+                        class="form-control" 
+                        id="fechaFinEx" 
+                        placeholder="" 
+                        >
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="descripcionEx">Descripción</label>
+                        <input 
+                        type="text" 
+                        ngModel ngModel="{{actualizarExperiencia?.descripcionEx}}"
+                        name="descripcionEx" 
+                        class="form-control" 
+                        id="descripcionEx" 
+                        placeholder="" 
+                        >
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="imgEx">URL Imágen</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{actualizarExperiencia?.imgEx}}"
+                        name="imgEx" 
+                        class="form-control" 
+                        id="imgEx" 
+                        placeholder="" 
+                        >
+                    </div>
+                    <div class="modal-footer">
+                        <button 
+                        type="button" 
+                        id="" 
+                        class="btn btn-secondary" 
+                        data-dismiss="modal">
+                            Cerrar
+                        </button>
+                        <button 
+                        (click)="onUpdateExperiencia(editForm.value)" 
+                        data-dismiss="modal" 
+                        class="btn btn-primary"> 
+                            Guardar cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<!-- Modal Eliminar una Experiencia -->
+
+<div 
+    class="modal fade" 
+    id="eliminarExperienciaModal" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="eliminarExperienciaModalLabel" 
+    aria-hidden="true"
+    data-bs-toggle="modal"
+    data-bs-target="#eliminarExperienciaModalLabel"
+    >
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content font1">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eliminarExperienciaModalLabel">Eliminar Experiencia</h5>
+                <button 
+                type="button" 
+                class="close" 
+                data-dismiss="modal" 
+                aria-label="close">
+                <span aria-hidden="true"> &times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    ¿Estas seguro de eliminar Experiencia {{eliminarExperiencia?.empresaEx}}?
+                </p>
+                <div class="modal-footer">
+                    <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                    >
+                        No
+                    </button>
+                    <button
+                    (click)="onDeleteExperiencia(eliminarExperiencia!.idEx)"
+                    class="btn btn-danger"
+                    data-dismiss="modal"
+                    >
+                        Si
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<!-- Alerta No existen Experiencia -->
+
+<div *ngIf="experiencias?.length == 0" class="col-lg-12 col-md-12 col-xl-12"> 
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">No existen Experiencias</h4>
+        <p>Experiencias no encontradas.</p>
+    </div>
+</div>
