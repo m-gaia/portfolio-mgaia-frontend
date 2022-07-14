@@ -1,1 +1,265 @@
-<p>habilidades works!</p>
+<div class="row main-container font1">
+    <div class="d-grid gap-2 col-lg-12 mx-auto py-2">
+        <div id="educacion" class="card-header bg-dark py-3 blockquote">
+            <h2 class="text-light text-uppercase card-title"><i class="fas fa-graduation-cap px-2"></i>Habilidades</h2>
+        </div>
+        <div class="text-center py-2">
+            <button type="button" class="btn btn-success" (click)="onOpenModal('agregar')">
+                <a class="nav-link text-light">
+                Añadir Habilidad <span class="sr-only">(current)</span>
+                </a>
+            </button>
+        </div>
+    </div>
+</div>
+<div id="main-container">
+    <div *ngFor="let habilidad of habilidades" class="col-lg-12 py-2">
+        <div class="container card rounded-start py-2 font1">
+            <div class="row align-items-center" >
+                <div class="col card-title">
+                    {{ habilidad.nombreHab }}
+                    <circle-progress
+                    [percent]="habilidad.nivelPorc"
+                    [radius]="100"
+                    [showUnits]="false"
+                    [showImage]="true"
+                    [imageHeight]="70"
+                    [imageWidth]="70"
+                    [showSubtitle]="true"
+                    [titleFontSize]="'25px'"
+                    [outerStrokeWidth]="12"
+                    [innerStrokeWidth]="2"
+                    [title]="habilidad.nombreHab"
+                    [imageSrc]="habilidad.imgHab"
+                    [innerStrokeColor]="'#e7e8ea'"
+                    [animation]="true"
+                    [animationDuration]="100"
+                    ></circle-progress>
+                </div>
+                <div class="col text-center">
+                    <a 
+                    (click)="onOpenModal('actualizar', habilidad)"
+                    class="btn btn-primary tooltips mx-2"
+                    data-placement="top"
+                    data-toggle="tooltip"
+                    data-original-title="Actualizar"
+                    ><i class="fas fa-edit"></i>
+                    </a>
+                    <a 
+                    (click)="onOpenModal('eliminar', habilidad)"
+                    class="btn btn-secondary tooltips mx-2"
+                    data-placement="top"
+                    data-toggle="tooltip"
+                    data-original-title="Eliminar"
+                    ><i class="fas fa-trash-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Añadir Habilidad -->
+
+<div 
+    class="modal fade" 
+    id="agregarHabilidadModal" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="agregarHabilidadModalLabel" 
+    aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agregarHabilidadModalLabel">Añadir Habilidad</h5>
+            </div>
+            <div class="modal-body font1">
+                <form #addForm="ngForm" (ngSubmit)="onAddHabilidad(addForm)">
+                    <div class="form-group my-2">
+                        <label for="nombreHab">Nombre</label>
+                        <input 
+                        type="text" 
+                        ngModel 
+                        name="nombreHab" 
+                        class="form-control" 
+                        id="nombreHab" 
+                        placeholder="Nombre" 
+                        required>
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="nivelPorc">Porcentaje</label>
+                        <input 
+                        type="text" 
+                        ngModel 
+                        name="nivelPorc" 
+                        class="form-control" 
+                        id="nivelPorc" 
+                        placeholder="Porcentaje" 
+                        required>
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="imgHab">URL Imágen</label>
+                        <input 
+                        type="text" 
+                        ngModel 
+                        name="imgHab" 
+                        class="form-control" 
+                        id="imgHab" 
+                        placeholder="Logo" 
+                        required>
+                    </div>
+                    <div class="modal-footer">
+                        <button 
+                        type="button" 
+                        id="add-skill-form" 
+                        class="btn btn-secondary" 
+                        data-dismiss="modal">
+                            Cerrar
+                        </button>
+                        <button 
+                        [disabled]="addForm.invalid" 
+                        type="submit" 
+                        class="btn btn-primary"> 
+                            Añadir cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<!-- Modal Editar Habilidad -->
+
+<div 
+    class="modal fade" 
+    id="actualizarHabilidadModal" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="actualizarHabilidadModalLabel" 
+    aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="actualizarHabilidadModalLabel">
+                    Editar Habilidad {{actualizarHabilidades?.nombreHab}}
+                </h5>
+            </div>
+            <div class="modal-body font1">
+                <form #editForm="ngForm">
+                    <div class="form-group my-2">
+                        <label for="nombreHab">Nombre</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{actualizarHabilidades?.nombreHab}}"
+                        name="nombreHab" 
+                        class="form-control" 
+                        id="nombreHab" 
+                        aria-describedby="emailHelp"
+                        placeholder="Nombre" 
+                        >
+                    </div>
+                    <input 
+                    type="hidden" 
+                    ngModel="{{actualizarHabilidades?.idHab}}"
+                    name="idHab" 
+                    class="form-control" 
+                    id="idHab" 
+                    placeholder="" 
+                    >
+                    <div class="form-group my-2">
+                        <label for="nivelPorc">Porcentaje</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{actualizarHabilidades?.nivelPorc}} "
+                        name="nivelPorc" 
+                        class="form-control" 
+                        id="nivelPorc" 
+                        placeholder="" 
+                        >
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="imgHab">URL Imágen</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{actualizarHabilidades?.imgHab}}"
+                        name="imgHab" 
+                        class="form-control" 
+                        id="imgHab" 
+                        placeholder="" 
+                        >
+                    </div>
+                    <div class="modal-footer">
+                        <button 
+                        type="button" 
+                        id="" 
+                        class="btn btn-secondary" 
+                        data-dismiss="modal">
+                            Cerrar
+                        </button>
+                        <button 
+                        (click)="onUpdateHabilidad(editForm.value)" 
+                        data-dismiss="modal" 
+                        class="btn btn-primary"> 
+                            Guardar cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<!-- Modal Eliminar una Habilidad -->
+
+<div 
+    class="modal fade" 
+    id="eliminarHabilidadModal" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="eliminarHabilidadModalLabel" 
+    aria-hidden="true"
+    data-bs-toggle="modal"
+    data-bs-target="#eliminarHabilidadModalLabel"
+    >
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content font1">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eliminarHabilidadModalLabel">Eliminar Habilidad</h5>
+            </div>
+            <div class="modal-body">
+                <p>
+                    ¿Estas seguro de eliminar Habilidad {{eliminarHabilidades?.nombreHab}}?
+                </p>
+                <div class="modal-footer">
+                    <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                    >
+                        No
+                    </button>
+                    <button
+                    (click)="onDeleteHabilidad(eliminarHabilidades!.idHab)"
+                    class="btn btn-danger"
+                    data-dismiss="modal"
+                    >
+                        Si
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<!-- Alerta No existen Educaciones -->
+
+<div *ngIf="habilidades?.length == 0" class="col-lg-12 col-md-12 col-xl-12"> 
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">No existen Habilidades</h4>
+        <p>Habilidades no encontradas.</p>
+    </div>
+</div>

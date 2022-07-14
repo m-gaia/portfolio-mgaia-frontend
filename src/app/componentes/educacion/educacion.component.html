@@ -16,7 +16,7 @@
   <div *ngFor="let educacion of educaciones" class="col-lg-12 py-2">
     <div class="container card rounded-start py-2 font1">
         <div class="row align-items-center" >
-            <div class="col">
+            <div class="col-12 mb-3">
                 <img src="{{educacion.imgEdu}}"  alt="" width="200">
             </div>
             <div class="col">
@@ -50,7 +50,7 @@
   </div>
 </div>
 
-  <!-- Modal Añadir Educacion -->
+<!-- Modal Añadir Educacion -->
 
 <div 
     class="modal fade" 
@@ -64,13 +64,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="agregarEducacionModalLabel">Añadir Educación</h5>
-                <button 
-                type="button" 
-                class="close rounded" 
-                data-dismiss="modal" 
-                aria-label="Close">
-                <span aria-hidden="true"> &times;</span>
-                </button>
             </div>
             <div class="modal-body font1">
                 <form #addForm="ngForm" (ngSubmit)="onAddEducacion(addForm)">
@@ -177,13 +170,6 @@
                 <h5 class="modal-title" id="actualizarEducacionModalLabel">
                     Editar Educación {{actualizarEducacion?.tituloEdu}}
                 </h5>
-                <button 
-                type="button" 
-                class="close" 
-                data-dismiss="modal" 
-                aria-label="close">
-                <span aria-hidden="true"> &times;</span>
-                </button>
             </div>
             <div class="modal-body font1">
                 <form #editForm="ngForm">
@@ -300,13 +286,6 @@
         <div class="modal-content font1">
             <div class="modal-header">
                 <h5 class="modal-title" id="eliminarEducacionModalLabel">Eliminar Educación</h5>
-                <button 
-                type="button" 
-                class="close" 
-                data-dismiss="modal" 
-                aria-label="close">
-                <span aria-hidden="true"> &times;</span>
-                </button>
             </div>
             <div class="modal-body">
                 <p>

@@ -9,6 +9,7 @@ import { EducacionComponent } from './componentes/educacion/educacion.component'
 import { ExperienciaComponent } from './componentes/experiencia/experiencia.component';
 import { HabilidadesComponent } from './componentes/habilidades/habilidades.component';
 import { ProyectosComponent } from './componentes/proyectos/proyectos.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,30 @@ import { ProyectosComponent } from './componentes/proyectos/proyectos.component'
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgCircleProgressModule.forRoot({
+      "radius": 60,
+      "space": -10,
+      "outerStrokeWidth": 5,
+     // "outerStrokeColor": "#76C2AF",
+      //"innerStrokeColor": "#ffffff",
+      "innerStrokeWidth": 5,
+      //"imageSrc": "assets/images/music.svg",
+      "imageHeight": 105,
+      "imageWidth": 105,
+      "showImage": true,
+      "outerStrokeGradient": true,
+      "outerStrokeColor": "#47c28d",
+      "outerStrokeGradientStopColor": "#53a9ff",
+      "innerStrokeColor": "#e7e8ea",
+      "title": "UI",
+      "animateTitle": false,
+      "animationDuration": 1000,
+      "showUnits": false,
+      "showBackground": false,
+      "clockwise": false,
+      "startFromZero": false,
+      "lazy": true})
   ],
   providers: [],
   bootstrap: [AppComponent]
