@@ -1,7 +1,7 @@
 <div class="row main-container font1">
     <div class="d-grid gap-2 col-lg-12 mx-auto py-2">
-        <div id="educacion" class="card-header bg-dark py-3 blockquote">
-            <h2 class="text-light text-uppercase card-title"><i class="fas fa-graduation-cap px-2"></i>Habilidades</h2>
+        <div id="habilidades" class="card-header bg-dark py-3 blockquote">
+            <h2 class="text-light text-uppercase card-title"><i class="fas fa-heart px-2"></i>Habilidades</h2>
         </div>
         <div class="text-center py-2">
             <button type="button" class="btn btn-success" (click)="onOpenModal('agregar')">
@@ -13,14 +13,14 @@
     </div>
 </div>
 <div id="main-container">
-    <div *ngFor="let habilidad of habilidades" class="col-lg-12 py-2">
+    <div *ngFor="let habilidad of habilidades" class="col-lg-6 py-2 ">
         <div class="container card rounded-start py-2 font1">
-            <div class="row align-items-center" >
+            <div class="row align-items-center card-body" >
                 <div class="col card-title">
                     {{ habilidad.nombreHab }}
                     <circle-progress
                     [percent]="habilidad.nivelPorc"
-                    [radius]="100"
+                    [radius]="80"
                     [showUnits]="false"
                     [showImage]="true"
                     [imageHeight]="70"

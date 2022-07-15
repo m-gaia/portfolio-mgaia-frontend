@@ -1,1 +1,306 @@
-<p>proyectos works!</p>
+<div class="row main-container font1">
+    <div class="d-grid gap-2 col-lg-12 mx-auto py-2">
+        <div id="proyectos" class="card-header bg-dark py-3 blockquote">
+            <h2 class="text-light text-uppercase card-title"><i class="fas fa-laptop-code px-2"></i>Proyectos</h2>
+        </div>
+        <div class="text-center py-2">
+            <button type="button" class="btn btn-success" (click)="onOpenModal('agregar')">
+                <a class="nav-link text-light">
+                Añadir Proyecto <span class="sr-only">(current)</span>
+                </a>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="main-container">
+    <div *ngFor="let proyecto of proyectos" class="col-lg-6 py-2 ">
+        <div class="container card rounded-start py-2 font1" style="max-width: 540px;">
+            <div class="row g-0 align-items-center">
+                <div class="col">
+                    <img src="{{proyecto.imgProy}}"  alt="" width="100">
+                </div>
+
+                <div class="col">
+                    <div class="card-body">
+                        <h5 class="card-title">{{proyecto.nombreProy}}</h5>
+                        <p class="card-text">{{proyecto.descripcionProy}}</p>
+                        <p class="card-text"><small class="text-muted">{{proyecto.anioProy}}</small></p>
+                    </div>
+                    <div class="card-body">
+                        <a href="#" class="card-link">{{proyecto.urlProy}}</a>
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <a 
+                    (click)="onOpenModal('actualizar', proyecto)"
+                    class="btn btn-primary tooltips mx-2"
+                    data-placement="top"
+                    data-toggle="tooltip"
+                    data-original-title="Actualizar"
+                    ><i class="fas fa-edit"></i>
+                    </a>
+                    <a 
+                    (click)="onOpenModal('eliminar', proyecto)"
+                    class="btn btn-secondary tooltips mx-2"
+                    data-placement="top"
+                    data-toggle="tooltip"
+                    data-original-title="Eliminar"
+                    ><i class="fas fa-trash-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Añadir Proyecto -->
+
+<div 
+    class="modal fade" 
+    id="agregarProyectoModal" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="agregarProyectoModalLabel" 
+    aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agregarProyectoModalLabel">Añadir Proyecto</h5>
+            </div>
+            <div class="modal-body font1">
+                <form #addForm="ngForm" (ngSubmit)="onAddProyecto(addForm)">
+                    <div class="form-group my-2">
+                        <label for="nombreProy">Nombre</label>
+                        <input 
+                        type="text" 
+                        ngModel 
+                        name="nombreProy" 
+                        class="form-control" 
+                        id="nombreProy" 
+                        placeholder="Nombre" 
+                        required>
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="descripcionProy">Descripción</label>
+                        <input 
+                        type="text" 
+                        ngModel 
+                        name="descripcionProy" 
+                        class="form-control" 
+                        id="descripcionProy" 
+                        placeholder="Descripción" 
+                        required>
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="anioProy">Año</label>
+                        <input 
+                        type="text" 
+                        ngModel 
+                        name="anioProy" 
+                        class="form-control" 
+                        id="anioProy" 
+                        placeholder="Año (YYYY)" 
+                        required>
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="imgProy">URL Imágen</label>
+                        <input 
+                        type="text" 
+                        ngModel 
+                        name="imgProy" 
+                        class="form-control" 
+                        id="imgProy" 
+                        placeholder="Logo" 
+                        required>
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="urlProy">URL Proyecto</label>
+                        <input 
+                        type="text" 
+                        ngModel 
+                        name="urlProy" 
+                        class="form-control" 
+                        id="urlProy" 
+                        placeholder="URL Proyecto" 
+                        required>
+                    </div>
+                    <div class="modal-footer">
+                        <button 
+                        type="button" 
+                        id="add-proyect-form" 
+                        class="btn btn-secondary" 
+                        data-dismiss="modal">
+                            Cerrar
+                        </button>
+                        <button 
+                        [disabled]="addForm.invalid" 
+                        type="submit" 
+                        class="btn btn-primary"> 
+                            Añadir cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<!-- Modal Editar Proyecto -->
+
+<div 
+    class="modal fade" 
+    id="actualizarProyectoModal" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="actualizarProyectoModalLabel" 
+    aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="actualizarProyectoModalLabel">
+                    Editar Proyecto {{actualizarProyectos?.nombreProy}}
+                </h5>
+            </div>
+            <div class="modal-body font1">
+                <form #editForm="ngForm">
+                    <div class="form-group my-2">
+                        <label for="nombreProy">Nombre</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{actualizarProyectos?.nombreProy}}"
+                        name="nombreProy" 
+                        class="form-control" 
+                        id="nombreProy" 
+                        aria-describedby="emailHelp"
+                        placeholder="" 
+                        >
+                    </div>
+                    <input 
+                    type="hidden" 
+                    ngModel="{{actualizarProyectos?.idProy}}"
+                    name="idProy" 
+                    class="form-control" 
+                    id="idProy" 
+                    placeholder="" 
+                    >
+                    <div class="form-group my-2">
+                        <label for="descripcionProy">Descripción</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{actualizarProyectos?.descripcionProy}} "
+                        name="descripcionProy" 
+                        class="form-control" 
+                        id="descripcionProy" 
+                        placeholder="" 
+                        >
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="anioProy">Año</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{actualizarProyectos?.anioProy}} "
+                        name="anioProy" 
+                        class="form-control" 
+                        id="anioProy" 
+                        placeholder="" 
+                        >
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="imgProy">URL Imágen</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{actualizarProyectos?.imgProy}}"
+                        name="imgProy" 
+                        class="form-control" 
+                        id="imgProy" 
+                        placeholder="" 
+                        >
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="urlProy">URL Proyecto</label>
+                        <input 
+                        type="text" 
+                        ngModel="{{actualizarProyectos?.urlProy}}"
+                        name="urlProy" 
+                        class="form-control" 
+                        id="urlProy" 
+                        placeholder="" 
+                        >
+                    </div>
+                    <div class="modal-footer">
+                        <button 
+                        type="button" 
+                        id="" 
+                        class="btn btn-secondary" 
+                        data-dismiss="modal">
+                            Cerrar
+                        </button>
+                        <button 
+                        (click)="onUpdateProyecto(editForm.value)" 
+                        data-dismiss="modal" 
+                        class="btn btn-primary"> 
+                            Guardar cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<!-- Modal Eliminar un Proyecto -->
+
+<div 
+    class="modal fade" 
+    id="eliminarProyectoModal" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="eliminarProyectoModalLabel" 
+    aria-hidden="true"
+    data-bs-toggle="modal"
+    data-bs-target="#eliminarProyectoModalLabel"
+    >
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content font1">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eliminarProyectoModalLabel">Eliminar Proyecto</h5>
+            </div>
+            <div class="modal-body">
+                <p>
+                    ¿Estas seguro de eliminar Proyecto {{eliminarProyectos?.nombreProy}}?
+                </p>
+                <div class="modal-footer">
+                    <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                    >
+                        No
+                    </button>
+                    <button
+                    (click)="onDeleteProyecto(eliminarProyectos!.idProy)"
+                    class="btn btn-danger"
+                    data-dismiss="modal"
+                    >
+                        Si
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<!-- Alerta No existen Proyectos -->
+
+<div *ngIf="proyectos?.length == 0" class="col-lg-12 col-md-12 col-xl-12"> 
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">No existen Proyectos</h4>
+        <p>Proyectos no encontrados.</p>
+    </div>
+</div>
+
+
