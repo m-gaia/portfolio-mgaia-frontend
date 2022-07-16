@@ -6,16 +6,64 @@
         <div class="text-center py-2">
             <button type="button" class="btn btn-success" (click)="onOpenModal('agregar')">
                 <a class="nav-link text-light">
-                Añadir Habilidad <span class="sr-only">(current)</span>
+                    + Añadir <span class="sr-only">(current)</span>
                 </a>
             </button>
         </div>
     </div>
 </div>
 <div id="main-container">
-    <div *ngFor="let habilidad of habilidades" class="col-lg-6 py-2 ">
-        <div class="container card rounded-start py-2 font1">
-            <div class="row align-items-center card-body" >
+    <div *ngFor="let habilidad of habilidades" class="py-2 ">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+              <div class="card h-100">
+                <div class="card-body">
+                    <div class="col card-title">
+                        {{ habilidad.nombreHab }}
+                        <circle-progress
+                        [percent]="habilidad.nivelPorc"
+                        [radius]="80"
+                        [showUnits]="false"
+                        [showImage]="true"
+                        [imageHeight]="70"
+                        [imageWidth]="70"
+                        [showSubtitle]="true"
+                        [titleFontSize]="'25px'"
+                        [outerStrokeWidth]="12"
+                        [innerStrokeWidth]="2"
+                        [title]="habilidad.nombreHab"
+                        [imageSrc]="habilidad.imgHab"
+                        [innerStrokeColor]="'#e7e8ea'"
+                        [animation]="true"
+                        [animationDuration]="100"
+                        ></circle-progress>
+                    </div>
+                    <div class="col text-center">
+                        <a 
+                        (click)="onOpenModal('actualizar', habilidad)"
+                        class="btn btn-primary tooltips mx-2"
+                        data-placement="top"
+                        data-toggle="tooltip"
+                        data-original-title="Actualizar"
+                        ><i class="fas fa-edit"></i>
+                        </a>
+                        <a 
+                        (click)="onOpenModal('eliminar', habilidad)"
+                        class="btn btn-secondary tooltips mx-2"
+                        data-placement="top"
+                        data-toggle="tooltip"
+                        data-original-title="Eliminar"
+                        ><i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+
+<!--        <div class="container card rounded-start py-2 font1">
+            <div class="row row-cols-1 row-cols-md-2 g-4  align-items-center card-body" >
                 <div class="col card-title">
                     {{ habilidad.nombreHab }}
                     <circle-progress
@@ -55,9 +103,9 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
-</div>
+</div> 
 
 <!-- Modal Añadir Habilidad -->
 
