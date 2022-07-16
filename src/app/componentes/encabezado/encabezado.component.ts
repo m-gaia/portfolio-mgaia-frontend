@@ -11,16 +11,16 @@ import { EncabezadoService } from 'src/app/servicios/encabezado.service';
 export class EncabezadoComponent implements OnInit {
 
   public usuario : Usuario | undefined;
-  public editUsuario : Usuario | undefined;
+  public actualizarUsuario : Usuario | undefined;
 
   constructor(private encabezadoService : EncabezadoService) { }
 
   ngOnInit(): void {
-    this.traerUsuario();
+    this.obtenerUsuario();
   }
 
-  public traerUsuario():void {
-    this.encabezadoService.traerUsuario().subscribe({
+  public obtenerUsuario():void {
+    this.encabezadoService.obtenerUsuario().subscribe({
       next: (response: Usuario) => {
         this.usuario=response;
       },
@@ -28,6 +28,33 @@ export class EncabezadoComponent implements OnInit {
         alert(error.message);
       }
       })
+  }
+
+  public onOpenModal (mode:String, usuario?: Usuario):void {
+    const container=document.getElementById('main-container');
+    const button=document.createElement('button');
+    button.type = 'button';
+    button.style.display='none';
+    button.setAttribute('data-toggle', 'modal');
+
+    button.setAttribute('data-target', '#actualizarUsuarioModal');
+    
+    container?.appendChild(button);
+    button.click();
+  }
+
+  public onUpdateUsuario(usuario: Usuario) {
+    this.actualizarUsuario=usuario;
+    document.getElementById('add-user-form')?.click();
+    this.encabezadoService.actualizarUsuario(usuario).subscribe ({
+    next: (response:Usuario) => {
+      console.log(response);
+      this.obtenerUsuario();
+    },
+    error:(error:HttpErrorResponse) => {
+      alert(error.message);
+    }
+  })
   }
 
 }

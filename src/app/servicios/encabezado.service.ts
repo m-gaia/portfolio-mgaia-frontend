@@ -13,7 +13,7 @@ export class EncabezadoService {
 
   constructor(private http: HttpClient) { }
 
-  public traerUsuario():Observable<Usuario> {
+  public obtenerUsuario():Observable<Usuario> {
     return this.http.get<Usuario>(`${this.apiServerUrl}/usuario/id/1`);
   }
 

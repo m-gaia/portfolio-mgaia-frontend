@@ -1,4 +1,58 @@
-<div *ngIf="usuario">
-    <h2>{{usuario.nombre}}</h2>
-    <img src="{{usuario.img}}" alt="" width="100">
+
+<div *ngIf="usuario" id="main-container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 px-0">
+                <div>
+                    <img
+                        src="assets/images/banner-black.png"
+                        alt="banner"
+                        class="d-inline-block img-fluid"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid card py-3 mb-3 font1">
+        <div class="row">
+            <div class="col-12">
+                <div
+                id="perfil"
+                class="col-lg-12 col-md-12 position-absolute top-0 start-50 translate-middle"
+                >
+                    <a href="#" class="right-btn mx-3"><i class="fas fa-edit"></i></a>
+                    <img
+                        src="{{usuario.img}}"
+                        alt="logo"
+                        width="140"
+                        height="150"
+                        class="d-inline-block rounded-circle superponer"
+                    />
+                </div>
+                <div id="titulo" class="col-lg-6 col-md-6 py-lg-3 mx-auto text-center">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <a href="#" class="right-btn float-end"
+                                ><i class="fas fa-edit"></i
+                            ></a>
+                            <h1 class="fw-light">
+                                <!--<strong>{{ miPortfolio.name }}</strong>-->
+                                <strong>{{usuario.nombre}} {{usuario.apellido}}</strong>
+                            </h1>
+                            <h2 class="lead fw-light text-muted py-2">
+                                {{usuario.titulo}}
+                                <!--{{ miPortfolio.position }}-->
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-3 row card text-muted">
+                <div class="col-lg-12 align-items-center">
+                    <h5 class="text-center">{{usuario.descripcion}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
