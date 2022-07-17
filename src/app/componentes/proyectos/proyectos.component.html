@@ -20,7 +20,6 @@
                 <div class="col">
                     <img class="w-100" src="{{proyecto.imgProy}}"  alt="logo" width="50" height="200">
                 </div>
-
                 <div class="col">
                     <div class="card-body">
                         <h5 class="card-title">{{proyecto.nombreProy}}</h5>
@@ -138,7 +137,7 @@
                         [disabled]="addForm.invalid" 
                         type="submit" 
                         class="btn btn-primary"> 
-                            Añadir cambios
+                            Guardar
                         </button>
                     </div>
                 </form>
@@ -242,7 +241,7 @@
                         (click)="onUpdateProyecto(editForm.value)" 
                         data-dismiss="modal" 
                         class="btn btn-primary"> 
-                            Guardar cambios
+                            Guardar 
                         </button>
                     </div>
                 </form>

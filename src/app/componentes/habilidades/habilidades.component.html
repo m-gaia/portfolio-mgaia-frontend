@@ -12,98 +12,52 @@
         </div>
     </div>
 </div>
-<div id="main-container">
+<div id="main-container" class="container">
     <div *ngFor="let habilidad of habilidades" class="py-2 ">
-        <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="row row-cols-2">
             <div class="col">
-              <div class="card h-100">
-                <div class="card-body">
-                    <div class="col card-title">
-                        {{ habilidad.nombreHab }}
-                        <circle-progress
-                        [percent]="habilidad.nivelPorc"
-                        [radius]="80"
-                        [showUnits]="false"
-                        [showImage]="true"
-                        [imageHeight]="70"
-                        [imageWidth]="70"
-                        [showSubtitle]="true"
-                        [titleFontSize]="'25px'"
-                        [outerStrokeWidth]="12"
-                        [innerStrokeWidth]="2"
-                        [title]="habilidad.nombreHab"
-                        [imageSrc]="habilidad.imgHab"
-                        [innerStrokeColor]="'#e7e8ea'"
-                        [animation]="true"
-                        [animationDuration]="100"
-                        ></circle-progress>
-                    </div>
-                    <div class="col text-center">
-                        <a 
-                        (click)="onOpenModal('actualizar', habilidad)"
-                        class="btn btn-primary tooltips mx-2"
-                        data-placement="top"
-                        data-toggle="tooltip"
-                        data-original-title="Actualizar"
-                        ><i class="fas fa-edit"></i>
-                        </a>
-                        <a 
-                        (click)="onOpenModal('eliminar', habilidad)"
-                        class="btn btn-secondary tooltips mx-2"
-                        data-placement="top"
-                        data-toggle="tooltip"
-                        data-original-title="Eliminar"
-                        ><i class="fas fa-trash-alt"></i>
-                        </a>
+                <div class="h-100">
+                    <div>
+                        <h5>{{ habilidad.nombreHab }}</h5>
+                        <div>
+                            <circle-progress
+                            [percent]="habilidad.nivelPorc"
+                            [radius]="100"
+                            [showUnits]="false"
+                            [showImage]="true"
+                            [imageHeight]="70"
+                            [imageWidth]="70"
+                            [showSubtitle]="true"
+                            [titleFontSize]="'25px'"
+                            [outerStrokeWidth]="12"
+                            [innerStrokeWidth]="2"
+                            [title]="habilidad.nombreHab"
+                            [imageSrc]="habilidad.imgHab"
+                            [innerStrokeColor]="'#e7e8ea'"
+                            [animation]="true"
+                            [animationDuration]="600"
+                            ></circle-progress>
+                            <a 
+                            (click)="onOpenModal('actualizar', habilidad)"
+                            class="btn btn-primary tooltips mx-2"
+                            data-placement="top"
+                            data-toggle="tooltip"
+                            data-original-title="Actualizar"
+                            ><i class="fas fa-edit"></i>
+                            </a>
+                            <a 
+                            (click)="onOpenModal('eliminar', habilidad)"
+                            class="btn btn-secondary tooltips mx-2"
+                            data-placement="top"
+                            data-toggle="tooltip"
+                            data-original-title="Eliminar"
+                            ><i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-              </div>
             </div>
         </div>
-
-
-<!--        <div class="container card rounded-start py-2 font1">
-            <div class="row row-cols-1 row-cols-md-2 g-4  align-items-center card-body" >
-                <div class="col card-title">
-                    {{ habilidad.nombreHab }}
-                    <circle-progress
-                    [percent]="habilidad.nivelPorc"
-                    [radius]="80"
-                    [showUnits]="false"
-                    [showImage]="true"
-                    [imageHeight]="70"
-                    [imageWidth]="70"
-                    [showSubtitle]="true"
-                    [titleFontSize]="'25px'"
-                    [outerStrokeWidth]="12"
-                    [innerStrokeWidth]="2"
-                    [title]="habilidad.nombreHab"
-                    [imageSrc]="habilidad.imgHab"
-                    [innerStrokeColor]="'#e7e8ea'"
-                    [animation]="true"
-                    [animationDuration]="100"
-                    ></circle-progress>
-                </div>
-                <div class="col text-center">
-                    <a 
-                    (click)="onOpenModal('actualizar', habilidad)"
-                    class="btn btn-primary tooltips mx-2"
-                    data-placement="top"
-                    data-toggle="tooltip"
-                    data-original-title="Actualizar"
-                    ><i class="fas fa-edit"></i>
-                    </a>
-                    <a 
-                    (click)="onOpenModal('eliminar', habilidad)"
-                    class="btn btn-secondary tooltips mx-2"
-                    data-placement="top"
-                    data-toggle="tooltip"
-                    data-original-title="Eliminar"
-                    ><i class="fas fa-trash-alt"></i>
-                    </a>
-                </div>
-            </div>
-        </div>-->
     </div>
 </div> 
 
@@ -169,7 +123,7 @@
                         [disabled]="addForm.invalid" 
                         type="submit" 
                         class="btn btn-primary"> 
-                            Añadir cambios
+                            Guardar
                         </button>
                     </div>
                 </form>
@@ -251,7 +205,7 @@
                         (click)="onUpdateHabilidad(editForm.value)" 
                         data-dismiss="modal" 
                         class="btn btn-primary"> 
-                            Guardar cambios
+                            Guardar
                         </button>
                     </div>
                 </form>

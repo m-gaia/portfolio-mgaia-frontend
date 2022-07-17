@@ -37,7 +37,9 @@ export class EncabezadoComponent implements OnInit {
     button.style.display='none';
     button.setAttribute('data-toggle', 'modal');
 
-    button.setAttribute('data-target', '#actualizarUsuarioModal');
+    if (mode==='actualizar') {
+      this.actualizarUsuario=usuario;
+    button.setAttribute('data-target', '#actualizarUsuarioModal');}
     
     container?.appendChild(button);
     button.click();
