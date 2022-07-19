@@ -6,10 +6,20 @@
                 <div class="col-12 px-0">
                     <div>
                         <img
-                            src="assets/images/banner-black.png"
+                            src="assets/images/banner.png"
                             alt="banner"
-                            class="d-inline-block img-fluid"
+                            class="d-inline-block img-fluid w-100"
                         />
+                        <div class="pt-1">
+                            <a 
+                            (click)="onOpenModal('actualizar', usuario)"
+                            class="btn btn-primary tooltips mx-2 right-btn float-end"
+                            data-placement="top"
+                            data-toggle="tooltip"
+                            data-original-title="Actualizar"
+                            ><i class="fas fa-edit"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -17,27 +27,18 @@
         <div class="container card border-light py-3 mb-3 font1" >
             <div class="row">
                 <div class="col-12">
-                    <a 
-                    (click)="onOpenModal('actualizar', usuario)"
-                    class="btn btn-primary tooltips mx-2 right-btn float-end"
-                    data-placement="top"
-                    data-toggle="tooltip"
-                    data-original-title="Actualizar"
-                    ><i class="fas fa-edit"></i>
-                    </a>
                     <div
                     class="col-lg-12 col-md-12 position-absolute top-0 start-50 translate-middle"
                     >
-    <!--                 <a href="#" class="right-btn mx-3"><i class="fas fa-edit"></i></a>--> 
                         <img
                             src="{{usuario.img}}"
                             alt="logo"
                             width="140"
                             height="150"
-                            class="d-inline-block rounded-circle superponer mx-3"
+                            class="d-inline-block rounded-circle superponer mx-3 mb-5"
                         />
                     </div>
-                    <div class="col-lg-6 col-md-6 py-lg-3 mx-auto text-center">
+                    <div class="col-lg-6 col-md-6 py-2 mx-auto text-center">
                         <div class="row align-items-center">
                             <div class="col-10">
                                 <h1 class="fw-light">
@@ -167,7 +168,8 @@
                     </div>
                     <div class="modal-footer">
                         <button 
-                        type="button"   
+                        type="button"  
+                        id="add-header-form" 
                         class="btn btn-secondary" 
                         data-dismiss="modal">
                             Cerrar

@@ -47,7 +47,7 @@ export class EncabezadoComponent implements OnInit {
 
   public onUpdateUsuario(usuario: Usuario) {
     this.actualizarUsuario=usuario;
-    document.getElementById('add-user-form')?.click();
+    document.getElementById('add-header-form')?.click();
     this.encabezadoService.actualizarUsuario(usuario).subscribe ({
     next: (response:Usuario) => {
       console.log(response);
